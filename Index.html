@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        nav ul {
+            list-style-type: none;
+        }
+
+        nav li {
+            display: inline;
+            margin: 10px;
+        }
+
+        .page {
+            padding: 20px;
+        }
+
+        select, textarea, input {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#prices">Prices</a></li>
+                <li><a href="#ordering">Ordering</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div id="home" class="page">
+        <h1>Your 3D Printing Business</h1>
+        <p>Welcome to our 3D printing service. Add your custom text here.</p>
+    </div>
+
+    <div id="about" class="page">
+        <h1>About Me</h1>
+        <p>Some information about you and your business. Add your text here.</p>
+        <img src="your-image.jpg" alt="Your Image">
+    </div>
+
+    <div id="prices" class="page">
+        <h1>Prices</h1>
+        <p>Our pricing:</p>
+        <ul>
+            <li>3 Euro for one hour of printing</li>
+            <li>2 Euro added per hour after that until 1 Euro, as it's free after that.</li>
+        </ul>
+    </div>
+
+    <div id="ordering" class="page">
+        <h1>Ordering</h1>
+        <p>Select color:</p>
+        <select id="color">
+            <option value="Black">Black</option>
+            <option value="White">White</option>
+            <option value="Grey">Grey</option>
+            <option value="Blue">Blue</option>
+            <option value="Red">Red</option>
+        </select>
+
+        <p>What do you want us to print?</p>
+        <textarea id="order-text" rows="4" cols="50"></textarea>
+
+        <p>Submit your name:</p>
+        <input type="text" id="first-name" placeholder="First Name">
+        <input type="text" id="last-name" placeholder="Last Name">
+
+        <button id="submit-order">Submit Order</button>
+
+        <div id="order-result"></div>
+    </div>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const submitOrderBtn = document.getElementById("submit-order");
+            const orderResult = document.getElementById("order-result");
+
+            if (submitOrderBtn) {
+                submitOrderBtn.addEventListener("click", function () {
+                    const color = document.getElementById("color").value;
+                    const orderText = document.getElementById("order-text").value;
+                    const firstName = document.getElementById("first-name").value;
+                    const lastName = document.getElementById("last-name").value;
+
+                    orderResult.innerHTML = `Dear Tibbe Snel,<br><br>I want to do an order for a 3D print of ${orderText} in the color ${color}.<br><br>Greetings ${firstName} ${lastName}`;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
