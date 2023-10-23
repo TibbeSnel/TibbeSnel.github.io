@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tibbe's 3D Printing Shop</title>
+    <link rel="stylesheet" href="style.css">
+    <title>Tibbe's 3d prining shop.</title>
+    <meta name="description" content="Dé 3d printing shop in Brummen en omstreken! Persoonlijk, voordelig en het wordt voor je ontworpen!">
+    <meta name="keywords" content="3d, 3d print, 3d printen, 3d printing, 3d printing service, op aanvraag, aanvraag, Tibbe, Snel, Tibbe Snel, Tibbe's, 3d printing company, 3d printing service, 3d printing services, online 3d printing, 3d printer service, 3d print service, 3d printed items, 3d printing online, 3d printing website, 3d printer services, 3d printing prices, order 3d prints, 3d printing price, 3d printing service online, 3d printing websites, 3d printing site, 3-d printing service, print 3d models, 3-d printing services">
+    <link rel="icon" type="image/x-icon" href="Icon.png">
+
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <h2>Tibbe's 3D Printing Shop</h2>
+        </div>
+        <nav>
+            <div class="menu">
+                <ul>
+                    <li class="active"><a href="#" class="menu-button home" id="homeButton">Home</a></li>
+                    <li><a href="#" class="menu-button" id="bestellenButton">Bestellen</a></li>
+                    <li><a href="#" class="menu-button" id="prijzenButton">Prijzen</a></li>
+                    <li><a href="#" class="menu-button" id="overMijButton">Over Mij</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class="bgSizeCover">
+    </div>
+    
+
+    <script>
+        const homeButton = document.getElementById("homeButton");
+        const bestellenButton = document.getElementById("bestellenButton");
+        const prijzenButton = document.getElementById("prijzenButton");
+        const overMijButton = document.getElementById("overMijButton");
+        const body = document.body;
+
+        homeButton.addEventListener("click", function () {
+            body.style.background = 'url("")'; // Change to the actual image path
+            body.style.backgroundSize = 'contain';
+        });
+
+        bestellenButton.addEventListener("click", function () {
+            body.style.background = 'url("homepage.png")';
+            body.style.backgroundSize = 'contain';
+        });
+
+        prijzenButton.addEventListener("click", function () {
+            body.style.background = 'url("")'; // Change to the actual image path
+            body.style.backgroundSize = 'contain';
+        });
+
+        overMijButton.addEventListener("click", function () {
+            body.style.background = 'url("")'; // Change to the actual image path
+            body.style.backgroundSize = 'contain';
+        });
+    </script>
+</body>
+</html>
