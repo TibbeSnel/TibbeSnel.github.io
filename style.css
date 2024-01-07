@@ -1,0 +1,67 @@
+:root {
+    --bg-image: url(Homepage!.png);
+}
+
+body, p, ul, li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.container {
+    position: relative;
+}
+
+.background {
+    background-image: var(--bg-image);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 123vw;
+    background-position: bottom;
+}
+
+header {
+    background-color: #a9a9a9;
+    width: 100vw;
+    color: #ffffff; 
+    padding: 10px 0;
+    position: static;
+    top: 0;
+    z-index: 1; /* to place it above the background */
+}
+
+.top-bar h2 {
+    margin: 0;
+    vertical-align: middle;
+    text-align: center;
+    margin: 0 auto;
+    font-family: Calibri;
+    font-size: 40px;
+}
+
+.menu {
+    text-align: center;
+}
+
+.menu button {
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    padding: 5px 10px;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 5px;
+    position: relative;
+    transition: background-color 0.3s;
+    font-family: Calibri;
+    font-size: 25px;
+}
+
+.menu button:hover {
+    background-color: #bebebe;
+    border: none;
+}
