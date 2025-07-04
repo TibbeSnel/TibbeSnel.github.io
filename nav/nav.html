@@ -1,0 +1,38 @@
+<nav id="nav" role="navigation" aria-label="Main Navigation">
+    <!-- Mobile: logo + hamburger icon -->
+    <div class="hamburger-icon">
+      <a href="index.html">
+        <img src="assets/logo.png" alt="Logo" class="nav-logo" loading="lazy" />
+      </a>
+      <div
+        class="menu-icon"
+        onclick="toggleMenu()"
+        aria-label="Toggle navigation menu"
+        tabindex="0"
+      >
+        <span class="line line1"></span>
+        <span class="line line2"></span>
+      </div>
+    </div>
+  
+    <!-- Mobile sliding menu -->
+    <div class="mobile-menu hidden">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Me</a>      
+      <a href="projects.html">Projects</a>
+      <a href="terminal.html"">Terminal</a>
+    </div>
+  
+    <!-- Desktop menu -->
+    <ul class="desktop-menu">
+      <li>
+        <a href="index.html">
+          <img src="assets/logo.png" alt="Logo" class="nav-logo" loading="lazy" />
+        </a>
+      </li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Me</a></li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="terminal.html">Terminal</a></li>
+    </ul>
+  </nav>

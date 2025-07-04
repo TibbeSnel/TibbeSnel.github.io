@@ -1,0 +1,94 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio – Home</title>
+  <link rel="icon" type="image/x-icon" href="assets/logo.ico">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="nav/nav.css" />
+  <link rel="stylesheet" href="footer/footer.css" />
+
+  <!-- font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Shared nav -->
+  <nav-component src="/nav/nav.html"></nav-component>
+
+  <!-- Page content -->
+  <main id="index-main">
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Hi! I'm Tibbe, welcome to <br> my portfolio</h1>
+        <p>This is my portfolio, where I showcase my projects and<br> what I’ve been working on. I'm always curious, learning, <br>and building something new.</p>
+      </div>
+      <div class="hero-image carousel">
+        <!-- Carousel slides will be injected here -->
+        <div class="arrow prev" id="prevBtn">&#10094;</div>
+        <div class="arrow next" id="nextBtn">&#10095;</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Shared footer -->
+  <footer-component src="/footer/footer.html"></footer-component>
+
+  <!-- Shared script (defines your custom elements) -->
+  <script src="/script.js" defer></script>
+
+  <!-- Carousel Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const carouselEl = document.querySelector('.hero-image.carousel');
+      let slideIndex = 0;
+      let projects = [];
+
+      // Fetch projects JSON
+      fetch('projects/projects.json')
+        .then(res => res.json())
+        .then(data => {
+          projects = data;
+          renderSlides();
+          showSlide(slideIndex);
+        });
+
+      function renderSlides() {
+        projects.forEach((proj, i) => {
+          const slide = document.createElement('div');
+          slide.className = 'carousel-slide';
+          slide.innerHTML = `
+            <a href="projects.html?project=${proj.slug}">
+              <img src="${proj.thumb.replace(/300\/200/, '1500/1000')}?random=${i + 1}" alt="${proj.title}">
+            </a>
+            <div class="title-bar">
+              <div class="title-text">${proj.title}</div>
+              <div class="summary">${proj.shortIntro}</div>
+            </div>`;
+          carouselEl.insertBefore(slide, document.getElementById('prevBtn'));
+        });
+      }
+
+      function showSlide(index) {
+        const slides = document.querySelectorAll('.carousel-slide');
+        slides.forEach((slide, i) => {
+          slide.style.display = (i === index) ? 'block' : 'none';
+        });
+      }
+
+      document.getElementById('prevBtn').addEventListener('click', () => {
+        slideIndex = (slideIndex - 1 + projects.length) % projects.length;
+        showSlide(slideIndex);
+      });
+      document.getElementById('nextBtn').addEventListener('click', () => {
+        slideIndex = (slideIndex + 1) % projects.length;
+        showSlide(slideIndex);
+      });
+    });
+  </script>
+
+</body>
+</html>

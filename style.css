@@ -1,0 +1,289 @@
+/* ── Global Settings ───────────────────────────────────────── */
+:root {
+  font-size: 2vh;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.0625rem;
+  scrollbar-width: thin;
+  scrollbar-color: #202020 #000;
+}
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  color: #f8f9fa;
+}
+
+/* ── Page Background & Navigation ─────────────────────────── */
+body {
+  background: #000;
+}
+nav-component {
+  display: block;
+  height: 4rem;
+}
+
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* ── Home Page ───────────────────────────────────────────────────────────── */
+/* ────────────────────────────────────────────────────────────────────────── */
+#index-main {
+  margin: 4rem auto 0;
+  padding: 0;
+  max-width: 100%;
+}
+
+.about-link:hover {
+  text-decoration: underline;
+}
+
+/* Hero Section */
+.hero {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+  align-items: center;
+  justify-items: center;
+  width: 90vw;
+  max-width: 100vw;
+  padding: 6rem 2rem;
+  gap: 1rem;
+  margin: 0 auto;
+}
+.hero-text h1 {
+  font-size: clamp(3rem, 6vw, 5rem);
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+}
+.hero-text p {
+  font-size: 1.2rem;
+  line-height: 1.5;
+  padding: 0 0.3rem;
+}
+.hero-image {
+  position: relative;
+  width: 100%;
+  max-width: 43.75rem;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: #000;
+}
+
+/* Carousel Slides */
+.carousel-slide {
+  display: none;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+.carousel-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+
+/* Title Bar Overlay */
+.title-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3em;
+  background: rgba(16, 16, 16, 0.7);
+  padding: 1rem;
+  font-size: 1.5em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  transition: height 0.3s ease;
+  border-radius: 0 0 0.75rem 0.75rem;
+}
+.title-bar:hover {
+  height: auto;
+  max-height: 50%;
+}
+.title-text {
+  font-weight: bold;
+}
+.summary {
+  font-size: 0.9em;
+  margin-top: 0.5em;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow-wrap: break-word;
+  transition: opacity 0.3s ease;
+}
+.title-bar:hover .summary {
+  opacity: 1;
+}
+
+/* Carousel Arrows */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 3em;
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.3s;
+  z-index: 2;
+}
+.arrow:hover {
+  transform: translateY(-50%) scale(1.2);
+}
+.prev {
+  left: 0.5em;
+}
+.next {
+  right: 0.5em;
+}
+
+/* Responsive Adjustments*/
+@media (max-width: 768px), (orientation: portrait) {
+  .hero {
+    padding: 3rem 0;
+  }
+  .hero-text {
+    padding-bottom: 2rem;
+    text-align: center;
+  }
+  .hero-text h1 {
+    text-align: center;
+  }
+  .hero-image {
+    max-width: 100%;
+  }
+  .title-bar {
+    height: 2.5em;
+    font-size: 1em;
+    padding: 0.5rem;
+  }
+  .br-mobile {
+    display: inline !important;
+  }
+  .indent-desktop {
+    display: none !important;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* ── about-me ────────────────────────────────────────────────────────────── */
+/* ────────────────────────────────────────────────────────────────────────── */
+
+#about-main {
+  padding: 2rem;
+}
+
+#about-main h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+#about-main p {
+  font-size: 1.2rem;
+}
+
+
+
+/* ────────────────────────────────────────────────────────────────────────── */
+/* ── Projects ────────────────────────────────────────────────────────────── */
+/* ────────────────────────────────────────────────────────────────────────── */
+#projects-main {
+  margin-top: 8rem;
+}
+.tile-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17.5rem, 1fr));
+  gap: 1.5rem;
+  padding: 1rem 0;
+}
+.tile {
+  background: #00002a;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  text-decoration: none !important;
+  transition: transform 0.2s ease;
+}
+.tile:hover {
+  transform: translateY(-0.25rem);
+}
+.tile img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.tile-content {
+  padding: 1rem;
+}
+.tile-date {
+  font-size: 0.85rem;
+  color: #bbb;
+}
+.tile-title {
+  font-size: 1.2rem;
+}
+.tile-intro {
+  font-size: 0.95rem;
+  height: 1.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─────────────────────────────────────────────────────────────────────── */
+/* ── terminal ─────────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────────────────── */
+.terminal-main,
+.terminal-main * {
+  font-family: Consolas, monospace !important;
+  color: #00ff00 !important;
+}
+.terminal-main {
+  padding-top: 2rem;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+#terminal {
+  width: 100%;
+  overflow-y: auto;
+  padding: 2rem;
+  background-color: #000 !important;
+}
+#output {
+  white-space: pre-wrap;
+}
+.prompt {
+  display: flex;
+  align-items: flex-start;
+}
+.prompt span:last-of-type {
+  margin-right: 1ch;
+  white-space: nowrap;
+}
+input#terminalInput {
+  background: #000 !important;
+  color: #fff !important;
+  border: none;
+  outline: none;
+  flex: 1 1 auto;   /* grow and shrink as needed */
+  min-width: 0;     /* allow it to get smaller than its intrinsic size */
+}
+.prompt-user {
+  color: #00ff00 !important;
+}
+.prompt-path {
+  color: #00aaff !important;
+}
+.prompt-terminal,
+#output,
+#output div {
+  color: #fff !important;
+}
