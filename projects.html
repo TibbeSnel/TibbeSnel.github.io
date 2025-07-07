@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="nav/nav.css" />
   <link rel="stylesheet" href="footer/footer.css" />
-  <link rel="stylesheet" href="projects/projects.css" />
 </head>
 <body>
   <!-- Shared nav -->
@@ -19,7 +18,7 @@
   <!-- Page content -->
   <main id="projects-main">
     <div id="content">
-      <!-- This will be populated dynamically -->
+      <!-- GitHub project tiles will be injected here -->
     </div>
   </main>
 
@@ -29,66 +28,46 @@
   <!-- Shared script (defines your custom elements) -->
   <script src="/script.js" defer></script>
 
-
-
-  <!-- Logic to show project or list -->
+  <!-- GitHub Projects Fetch Logic -->
   <script type="module">
-    const params = new URLSearchParams(window.location.search);
-    const projectName = params.get('project');
     const contentDiv = document.getElementById('content');
 
-    if (projectName) {
-      const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-      if (isMobile) {
-        alert('This project content works better on desktop.');
-      }
+    fetch('https://api.github.com/users/TibbeSnel/repos')
+      .then(res => res.json())
+      .then(repos => {
+        // Sort by updated date descending
+        repos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
 
-      // Dynamically load the CSS
-      const link = document.createElement('link');
-      link.rel = 'stylesheet';
-      link.href = 'projects/projects.css';
-      document.head.appendChild(link);
+        const container = document.createElement('div');
+        const imageUrl = `https://raw.githubusercontent.com/TibbeSnel/${repo.name}/main/.metadata/thumb.jpg`;
 
-      // Load and run the dynamic project loader
-      import('./projects/load-project.js')
-        .then(module => {
-          module.loadProject(projectName);
-        })
-        .catch(err => {
-          contentDiv.innerHTML = `<p class="text-red-500">Error loading project.</p>`;
-          console.error(err);
+        container.className = 'tile-container';
+
+        repos.forEach(repo => {
+          const tile = document.createElement('a');
+          tile.href = repo.html_url;
+          tile.target = '_blank';
+          tile.className = 'tile';
+
+          tile.innerHTML = `
+            <img src="${imageUrl}" alt="${repo.name} thumbnail" onerror="this.style.display='none'">
+            <div class="tile-content">
+              <p class="tile-date">${new Date(repo.updated_at).toLocaleDateString()}</p>
+              <h3 class="tile-title">${repo.name}</h3>
+              <p class="tile-intro">${repo.description || 'No description available.'}</p>
+            </div>
+          `;
+
+
+          container.appendChild(tile);
         });
-    } else {
-      fetch('projects/projects.json')
-        .then(res => res.json())
-        .then(projects => {
-          const container = document.createElement('div');
-          container.className = 'tile-container';
 
-          projects.forEach(project => {
-            const tile = document.createElement('a');
-            tile.href = `projects.html?project=${encodeURIComponent(project.slug)}`;
-            tile.className = 'tile';
-
-            tile.innerHTML = `
-              <img src="${project.thumb}" alt="${project.title} thumbnail">
-              <div class="tile-content">
-                <p class="tile-date">${new Date(project.date).toLocaleDateString()}</p>
-                <h3 class="tile-title">${project.title}</h3>
-                <p class="tile-intro">${project.shortIntro}</p>
-              </div>
-            `;
-
-            container.appendChild(tile);
-          });
-
-          contentDiv.appendChild(container);
-        })
-        .catch(err => {
-          contentDiv.innerHTML = `<p class="text-red-500">Error loading projects.</p>`;
-          console.error(err);
-        });
-    }
+        contentDiv.appendChild(container);
+      })
+      .catch(err => {
+        contentDiv.innerHTML = `<p class="text-red-500">Error loading GitHub projects.</p>`;
+        console.error(err);
+      });
   </script>
 </body>
 </html>
