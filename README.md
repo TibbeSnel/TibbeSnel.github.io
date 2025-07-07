@@ -1,142 +1,62 @@
-Sure! Here's an example `README.md` that demonstrates many common Markdown features supported by GitHub:
+# Project Title
 
----
+Simple overview of use/purpose.
 
-````markdown
-# Example README
+## Description
 
-This is an **example** README to demonstrate _Markdown_ syntax in **GitHub**.  
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+An in-depth paragraph about your project and overview of use.
 
----
+## Getting Started
 
-## ✨ Features
+### Dependencies
 
-- **Bold text**
-- *Italic text*
-- ***Bold and italic***
-- ~~Strikethrough~~
-- `Inline code`
-- [Link to GitHub](https://github.com)
-- ![Image](https://via.placeholder.com/150)
+* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
+* ex. Windows 10
 
----
+### Installing
 
-## 📦 Code Blocks
+* How/where to download your program
+* Any modifications needed to be made to files/folders
 
-### Shell
+### Executing program
 
-```bash
-echo "Hello, world!"
-````
-
-### Python
-
-```python
-def hello():
-    print("Hello, GitHub Markdown!")
+* How to run the program
+* Step-by-step bullets
+```
+code blocks for commands
 ```
 
----
+## Help
 
-## 📋 Tables
-
-| Feature  | Description         |
-| -------- | ------------------- |
-| `Bold`   | Makes text **bold** |
-| `Italic` | Makes text *italic* |
-| `Code`   | Shows `inline code` |
-
----
-
-## ✅ Task List
-
-* [x] Write example
-* [x] Add lorem ipsum
-* [ ] Profit
-
----
-
-## 📚 Blockquote
-
-> "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-> — Someone, probably
-
----
-
-## 🧩 Horizontal Rule
-
----
-
-## 🧪 Emoji
-
-GitHub supports emoji like 👍 💡 🚀
-
----
-
-## 🔢 Ordered List
-
-1. First item
-2. Second item
-
-   1. Sub-item
-   2. Another sub-item
-3. Third item
-
----
-
-## 🔣 HTML inside Markdown
-
-<details>
-<summary>Click to expand</summary>
-
-<p>Lorem ipsum *within HTML*! 😄</p>
-
-</details>
-
----
-
-## 📌 Footnotes
-
-Here is a sentence with a footnote.[^1]
-
-[^1]: This is the footnote content.
-
----
-
-## 🧪 Math (GitHub does **not** render this by default)
-
-You can write math inline like this: `$E = mc^2$`
-Or display-style:
-
-```math
-\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+Any advise for common problems or issues.
+```
+command to run if program contains helper info
 ```
 
----
+## Authors
 
-## 📁 File Tree
+Contributors names and contact info
 
-```
-project/
-├── README.md
-├── src/
-│   └── main.py
-└── assets/
-    └── image.png
-```
+ex. Dominique Pizzie  
+ex. [@DomPizzie](https://twitter.com/dompizzie)
 
----
+## Version History
 
-## 🎉 That's all folks!
+* 0.2
+    * Various bug fixes and optimizations
+    * See [commit change]() or See [release history]()
+* 0.1
+    * Initial Release
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-*Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.*
+## License
 
-```
+This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
 
----
+## Acknowledgments
 
-Let me know if you'd like a version with specific formatting (e.g. dark mode friendly, minimal, themed).
-```
-
+Inspiration, code snippets, etc.
+* [awesome-readme](https://github.com/matiassingers/awesome-readme)
+* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
+* [dbader](https://github.com/dbader/readme-template)
+* [zenorocha](https://gist.github.com/zenorocha/4526327)
+* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
