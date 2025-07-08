@@ -18,7 +18,7 @@
 
   <!-- Page content -->
   <main id="about-main">
-    <article id="markdown-content" class="markdown-body">Loading...</article>
+    <article id="markdown-content" class="markdown-body"></article>
   </main>
 
   <!-- Shared footer -->
@@ -32,7 +32,7 @@
   <script type="module">
     const markdownContainer = document.getElementById('markdown-content');
     const cacheKey = 'aboutMarkdown';
-    const githubRawUrl = 'https://raw.githubusercontent.com/TibbeSnel/portfolio-site/main/_docs/about.md';
+    const githubRawUrl = 'https://raw.githubusercontent.com/TibbeSnel/portfolio-site/main/docs/about.md';
 
     const cached = sessionStorage.getItem(cacheKey);
 
@@ -50,7 +50,7 @@
         })
         .catch(err => {
           console.error('Error loading markdown:', err);
-          markdownContainer.innerHTML = `<p style="color:red;">Failed to load content.</p>`;
+          markdownContainer.innerHTML = `<p>Failed to load content.</p>`;
         });
     }
   </script>
