@@ -39,11 +39,12 @@
         repos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
 
         const container = document.createElement('div');
-        const imageUrl = `https://raw.githubusercontent.com/TibbeSnel/${repo.name}/main/.metadata/thumb.jpg`;
+
 
         container.className = 'tile-container';
 
         repos.forEach(repo => {
+          const imageUrl = `https://raw.githubusercontent.com/TibbeSnel/${repo.name}/main/.metadata/thumb.jpg`;
           const tile = document.createElement('a');
           tile.href = repo.html_url;
           tile.target = '_blank';
