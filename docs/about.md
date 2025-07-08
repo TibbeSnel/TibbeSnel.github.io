@@ -1,6 +1,6 @@
 
 # Test image
-![image](thumb.jpg))
+![image](thumb.jpg)
 
 # Project Title
 
