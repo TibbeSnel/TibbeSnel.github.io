@@ -40,33 +40,60 @@
   <!-- Shared script (defines your custom elements) -->
   <script src="/script.js" defer></script>
 
-  <!-- Carousel Script -->
-  <script>
+  <!-- GitHub Carousel with sessionStorage -->
+  <script type="module">
     document.addEventListener('DOMContentLoaded', () => {
       const carouselEl = document.querySelector('.hero-image.carousel');
       let slideIndex = 0;
       let projects = [];
 
-      // Fetch projects JSON
-      fetch('projects/projects.json')
-        .then(res => res.json())
-        .then(data => {
-          projects = data;
+      const cached = sessionStorage.getItem('githubRepos');
+
+      if (cached) {
+        try {
+          projects = JSON.parse(cached);
           renderSlides();
           showSlide(slideIndex);
-        });
+        } catch (e) {
+          console.warn('Failed to parse cached data, fetching fresh.');
+          fetchRepos();
+        }
+      } else {
+        fetchRepos();
+      }
+
+      function fetchRepos() {
+        fetch('https://api.github.com/users/TibbeSnel/repos')
+          .then(res => res.json())
+          .then(repos => {
+            repos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
+            projects = repos.slice(0, 5);
+            sessionStorage.setItem('githubRepos', JSON.stringify(projects));
+            renderSlides();
+            showSlide(slideIndex);
+          })
+          .catch(err => {
+            console.error('Failed to fetch GitHub projects:', err);
+            const errorSlide = document.createElement('div');
+            errorSlide.className = 'carousel-slide';
+            errorSlide.innerHTML = `<div class="title-bar"><div class="title-text">Error loading projects</div><div class="summary">Please try again later.</div></div>`;
+            carouselEl.insertBefore(errorSlide, document.getElementById('prevBtn'));
+          });
+      }
 
       function renderSlides() {
-        projects.forEach((proj, i) => {
+        projects.forEach((repo, i) => {
           const slide = document.createElement('div');
           slide.className = 'carousel-slide';
           slide.innerHTML = `
-            <a href="projects.html?project=${proj.slug}">
-              <img src="${proj.thumb.replace(/300\/200/, '1500/1000')}?random=${i + 1}" alt="${proj.title}">
+            <a href="projects.html">
+              <img src="https://raw.githubusercontent.com/TibbeSnel/${repo.name}/main/.metadata/thumb.jpg?random=${i + 1}" 
+                   alt="${repo.name} thumbnail" 
+                   onerror="this.style.display='none'">
             </a>
             <div class="title-bar">
-              <div class="title-text">${proj.title}</div>
-              <div class="summary">${proj.shortIntro}</div>
+              <div class="title-text">${repo.name}</div>
+              <div class="summary">${repo.description || 'No description available.'}</div>
             </div>`;
           carouselEl.insertBefore(slide, document.getElementById('prevBtn'));
         });
@@ -83,12 +110,12 @@
         slideIndex = (slideIndex - 1 + projects.length) % projects.length;
         showSlide(slideIndex);
       });
+
       document.getElementById('nextBtn').addEventListener('click', () => {
         slideIndex = (slideIndex + 1) % projects.length;
         showSlide(slideIndex);
       });
     });
   </script>
-
 </body>
 </html>
