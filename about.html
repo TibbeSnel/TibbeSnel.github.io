@@ -1,3 +1,4 @@
+<!-- about.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,6 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="nav/nav.css" />
   <link rel="stylesheet" href="footer/footer.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown-dark.min.css" />
 </head>
 <body>
   <!-- Shared nav -->
@@ -18,7 +18,129 @@
 
   <!-- Page content -->
   <main id="about-main">
-    <article id="markdown-content" class="markdown-body"></article>
+    <section class="about-intro">
+      <div class="about-text">
+        <h1>About me</h1>
+        <p>Hi, I’m Tibbe Snel, I am <span id="age"></span> years old and live in the Netherlands. I love figuring out how things work and using that knowledge to build cool stuff. I’m especially interested in computers, electronics, physics, and a bit of chemistry. But I’m not just into tech and science. I also enjoy learning about history, ancient Greek, and honestly anything I can learn about... Besides all that, I love listening to music and playing drums and piano. Oh, and I have two cats who sometimes walk across my keyboard mid-project. They're not very helpful, but they’re great company.<br><br> I really enjoy helping others understand things by explaining how they work. That’s why I made this site, to document my projects and share what I learn, hoping it can be useful to others too. Here’s a bit more about my education skills, experience and future plans: </p>
+      </div>
+        <img src="assets/siep.jpg" alt="Siep the cat" class="about-img" />
+    </section>
+    
+    <section class="education">
+      <h2 class="about-section-title">Education</h2>
+      <div class="edu-card-grid">
+        <div class="edu-card current">
+          <div class="edu-card-content">
+
+            <!-- Text Content -->
+            <div class="edu-text">
+              <h3 class="edu-title">Pre-university Education (VWO – Gymnasium)</h3>
+              <p class="edu-subtitle">Nature & Technology profile</p>
+              <p class="edu-description">
+                Courses included: Physics, Chemistry, Mathematics B (accelerated), Mathematics D, Computer Science, Dutch, English, and Ancient Greek.
+              </p>
+            </div>
+
+            <!-- Ribbon -->
+            <div class="ribbon">Current</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="skills-tools" id="skills-tools">
+      <h2 class="about-section-title">Skills and tools</h2>
+      <p class="about-section-text">These are the code languages skills and tools I use and am learning:</p>
+      <h3>Languages</h3>
+      <div class="skills-tools-card-grid">
+        <div class="skills-tools-card">
+          <img src="https://cdn.simpleicons.org/python/white" alt="Python" />
+          <span>Python</span>
+        </div>
+        <div class="skills-tools-card">
+          <img src="https://cdn.simpleicons.org/micropython/white" alt="Micropython" />
+          <span>Micropython</span>
+        </div>
+        <div class="skills-tools-card learning">
+          <img src="assets/about-me/verilog.png" alt="Verilog" />
+          <span>Verilog</span>
+          <div class="ribbon">Learning</div>
+        </div>
+        <div class="skills-tools-card learning">
+          <img src="https://cdn.simpleicons.org/riscv/white" alt="Assembly" />
+          <span>Assembly</span>
+          <div class="ribbon">Learning</div>
+        </div>
+      </div>
+
+      <h3>Tools</h3>
+      <div class="skills-tools-card-grid">
+        <div class="skills-tools-card">
+          <img src="assets/about-me/vscode.png" alt="VSCode" />
+          <span>VSCode</span>
+        </div>
+        <div class="skills-tools-card">
+          <img src="assets/about-me/terminal.png" alt="Terminal" />
+          <span>Terminal</span>
+        </div>
+        <div class="skills-tools-card">
+          <img src="https://cdn.simpleicons.org/git/white" alt="Git" />
+          <span>Git</span>
+        </div>
+        <div class="skills-tools-card">
+          <img src="https://cdn.simpleicons.org/github/white" alt="GitHub" />
+          <span>GitHub</span>
+        </div>
+        <div class="skills-tools-card">
+          <img src="https://cdn.simpleicons.org/proxmox/white" alt="Proxmox" />
+          <span>Proxmox</span>
+        </div>
+        <div class="skills-tools-card">
+          <img src="assets/about-me/soldering.png" alt="Soldering" />
+          <span>Soldering</span>
+        </div>
+        <div class="skills-tools-card learning">
+          <img src="assets/about-me/gowin.png" alt="Gowin EDA" />
+          <span>Gowin EDA</span>
+          <div class="ribbon">Learning</div>
+        </div>
+      </div>
+
+      <h3>Other</h3>
+      <div class="skills-tools-card-grid">
+        <div class="skills-tools-card">
+          <img src="https://cdn.simpleicons.org/linux/white" alt="Linux" />
+          <span>Linux</span>
+        </div>
+        <div class="skills-tools-card">
+          <img src="assets/about-me/server.png" alt="Server Setup" />
+          <span>Server Setup</span>
+        </div>
+        <div class="skills-tools-card">
+          <img src="assets/about-me/networking.png" alt="Basic networking" />
+          <span>Basic networking</span>
+        </div>
+        <div class="skills-tools-card">
+          <img src="https://cdn.simpleicons.org/raspberrypi/white" alt="Microcontrollers" />
+          <span>Microcontrollers</span>
+        </div>
+        <div class="skills-tools-card">
+          <img src="assets/about-me/pc.png" alt="PC Building" />
+          <span>PC Building</span>
+        </div>
+        <div class="skills-tools-card learning">
+          <img src="https://cdn.simpleicons.org/kicad/white" alt="PCB Design" />
+          <span>PCB Design</span>
+          <div class="ribbon">Learning</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="future">
+      <h2 class="about-section-title">Future Plans</h2>
+      <p class="about-section-text">In the coming years, I want to keep doing projects with electronics, computer architecture, etc. I also want to dive deeper into PCB design and the electronics side of things. Check the <a href="projects.html">project page</a> to see what I am currently working on.<br><br>After finishing high school, my plan is to study either Electrical Engineering or Computer Engineering at university, probably at the University of Twente. Later on, I’d like to specialize in something close to computer architecture.<br><br>After that my dream is to get a job in the field of digital chip design or something similar, and contribute to projects like RISC-V. I don’t know exactly where I’ll end up, but I know I want to build things that really work, and really matter.</p>
+    </section>
   </main>
 
   <!-- Shared footer -->
@@ -27,32 +149,18 @@
   <!-- Shared script -->
   <script src="script.js" defer></script>
 
-  <!-- Markdown rendering -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script type="module">
-    const markdownContainer = document.getElementById('markdown-content');
-    const cacheKey = 'aboutMarkdown';
-    const githubRawUrl = 'https://raw.githubusercontent.com/TibbeSnel/portfolio-site/main/docs/about.md';
 
-    const cached = sessionStorage.getItem(cacheKey);
-
-    if (cached) {
-      markdownContainer.innerHTML = marked.parse(cached);
-    } else {
-      fetch(githubRawUrl)
-        .then(res => {
-          if (!res.ok) throw new Error('Failed to fetch markdown');
-          return res.text();
-        })
-        .then(md => {
-          sessionStorage.setItem(cacheKey, md);
-          markdownContainer.innerHTML = marked.parse(md);
-        })
-        .catch(err => {
-          console.error('Error loading markdown:', err);
-          markdownContainer.innerHTML = `<p>Failed to load content.</p>`;
-        });
-    }
+  <script>
+    const birthDate = new Date(...atob("MjgtNy0yMDEw").split("-").reverse().map((v, i) => i === 1 ? +v - 1 : +v));
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const hasBirthdayPassedThisYear =
+      today.getMonth() > birthDate.getMonth() ||
+      (today.getMonth() === birthDate.getMonth() && today.getDate() >= birthDate.getDate());
+    if (!hasBirthdayPassedThisYear) age--;
+    document.getElementById("age").textContent = age;
   </script>
+
+
 </body>
 </html>
