@@ -1,0 +1,67 @@
+<!-- projects-static.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio – Playground YAY</title>
+    <link rel="icon" type="image/x-icon" href="assets/logo.ico">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="nav/nav.css" />
+    <link rel="stylesheet" href="footer/footer.css" />
+</head>
+
+<body>
+    <!-- Shared nav -->
+    <nav-component src="nav/nav.html"></nav-component>
+
+    <!-- Page content -->
+    <main id="projects-main">
+        <div id="content">
+            <div class="tile-container">
+
+                <!-- Example Tile 1 -->
+                <a href="playground/doom.html" target="_blank" class="tile">
+                    <img src="playground/doom/DOOM.png" onerror="this.style.display='none'">
+                    <div class="tile-content">
+                        <h3 class="tile-title">Doom</h3>
+                        <p class="tile-intro">Can a portfolio website run doom? Yeah, why not.</p>
+                    </div>
+                </a>
+
+                <!-- Example Tile 2 -->
+                <a href="playground/terminal.html" target="_blank" class="tile">
+                    <img src="assets/terminal.png" onerror="this.style.display='none'">
+                    <div class="tile-content">
+                        <h3 class="tile-title">Terminal</h3>
+                        <p class="tile-intro">Ever wanted to remove the french language pack of a website? Now you can!
+                        </p>
+                    </div>
+                </a>
+
+                <!-- Example Tile 3 -->
+                <a href="" target="_blank" class="tile">
+                    <img src="" onerror="this.style.display='none'">
+                    <div class="tile-content">
+                        <h3 class="tile-title"></h3>
+                        <p class="tile-intro"></p>
+                    </div>
+                </a>
+
+                <!-- Add more tiles here as needed -->
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Shared footer -->
+    <footer-component src="footer/footer.html"></footer-component>
+
+    <!-- Shared script (for custom elements only) -->
+    <script src="script.js" defer></script>
+</body>
+
+</html>

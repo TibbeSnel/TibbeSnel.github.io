@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Doom</title>
+    <link rel="stylesheet" href="https://js-dos.com/cdn/js-dos.css">
+    <script src="doom/js-dos-api.js"></script>
+    <script src="doom/js-dos-v3.js"></script>
+
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000;
+            color: #f8f9fa;
+            font-family: sans-serif;
+            height: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #DOOM {
+            width: 640px;
+            height: 400px;
+            position: relative;
+        }
+
+        .back-link {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            background: #000;
+            color: #f8f9fa;
+            border: 1px solid #f8f9fa;
+            padding: 0.4rem 0.8rem;
+            text-decoration: none;
+            font-size: 1rem;
+            border-radius: 4px;
+        }
+
+        .dosbox-container {
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        .dosbox-overlay {
+            background: url("doom/DOOM.png") center center no-repeat;
+            background-size: contain;
+        }
+
+        .fullscreen-button {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            background: black;
+            border: 1px solid #f8f9fa;
+            color: #f8f9fa;
+            padding: 0.5em 1em;
+            cursor: pointer;
+            font-size: 0.9rem;
+            border-radius: 6px;
+        }
+
+        .credit {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .credit a {
+            color: #f8f9fa;
+            text-decoration: none;
+        }
+
+        .dosbox-fullscreen .dosbox-container {
+            margin-left: auto !important;
+            margin-right: auto !important;
+            display: block !important;
+        }
+
+        /* Customize the start overlay text */
+        .dosbox-start {
+            color: white !important;
+            font-weight: bold !important;
+            text-decoration: none !important;
+            background-color: #000000c9 !important;
+            max-width: 10rem !important;
+            margin:auto !important;
+            border: 3px solid #f8f9fa !important;
+            border-radius: 6px !important;
+            padding: 0.5em 1em !important;
+            font-size: 1.5rem !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <a href="/playground.html" class="back-link">
+        &#10094; Back to playground
+    </a>
+
+    <div id="DOOM" class="dosbox-default"></div>
+
+    <div class="fullscreen-button" id="fullscreen-btn">Fullscreen</div>
+    <div class="credit">
+        by <a href="https://github.com/thedoggybrad" target="_blank">©TheDoggyBrad Software Lab</a>
+    </div>
+
+    <script>
+        const dosbox = new Dosbox({
+            id: "DOOM",
+            onload: function (dos) {
+                dos.run("doom/DOOM-@evilution.zip", "./DOOM/DOOM.EXE");
+            }
+        });
+
+        document.getElementById("fullscreen-btn").addEventListener("click", function () {
+            dosbox.requestFullScreen();
+        });
+    </script>
+</body>
+
+</html>
