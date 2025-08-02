@@ -2,50 +2,36 @@ html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: #202020 #000;
+  overflow-y: auto;
 }
-*, *::before, *::after {
+
+body {
+  background: #000;
+}
+
+.terminal-main,
+.terminal-main * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
   color: #f8f9fa;
   font-size: 1.1rem;
-}
-
-/* ── Page Background & Navigation ─────────────────────────── */
-body {
-  background: #000;
-}
-
-.back-link{
-  position: fixed;
-  top: 1rem;
-  left: 1rem;
-  background: #000;
-  border: 1px solid #f8f9fa;
-  padding: 0.4rem 0.8rem;
-  text-decoration: none;
-  font-size: 1rem;
-  border-radius: 4px;
-}
-
-.terminal-main,
-.terminal-main * {
-  font-family: Consolas, monospace !important;
-  color: #00ff00 !important;
+  font-family: Consolas, monospace;
+  color: #00ff00;
 }
 .terminal-main {
-  padding-top: 4rem;
-  height: 100vh;
+  padding-top: 6rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  padding-bottom: 4rem;
 }
 #terminal {
   width: 100%;
-  overflow-y: auto;
+  overflow-y: visible;
   padding: 1rem;
-  background-color: #000 !important;
+  background-color: #000;
 }
 #output {
   white-space: pre-wrap;
@@ -59,8 +45,8 @@ body {
   white-space: nowrap;
 }
 input#terminalInput {
-  background: #000 !important;
-  color: #fff !important;
+  background: #000;
+  color: #fff;
   border: none;
   outline: none;
   flex: 1 1 auto;   /* grow and shrink as needed */
@@ -77,3 +63,11 @@ input#terminalInput {
 #output div {
   color: #fff !important;
 }
+
+@media (max-width: 768px), (orientation: portrait) {
+  .terminal-main,
+  .terminal-main * {
+    font-size: 0.9rem;
+  }
+}
+

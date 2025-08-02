@@ -1,11 +1,9 @@
 /* ── Global Settings ───────────────────────────────────────── */
-:root {
-  font-size: 2vh;
-}
 html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: #202020 #000;
+  font-size: 1rem;
 }
 *, *::before, *::after {
   margin: 0;
@@ -433,15 +431,19 @@ h3.edu-title {
 /* ────────────────────────────────────────────────────────────────────────── */
 
 #projects-main {
-  margin-top: 4rem;
+  margin-bottom: 2rem;
+}
+
+#content {
+  margin-top: 8rem;
 }
 
 .tile-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, 25rem);
-  gap: 1.5rem;
-  padding: 1rem 0;
   justify-content: center;
+  gap: 1.5rem;
+  padding: 0 1rem;
 }
 
 /* Each tile has fixed width normally */

@@ -1,67 +1,501 @@
-<!-- projects-static.html -->
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Portfolio – Playground YAY</title>
-    <link rel="icon" type="image/x-icon" href="assets/logo.ico">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Portfolio – terminal</title>
+  <link rel="icon" type="image/x-icon" href="assets/logo.ico">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="nav/nav.css" />
-    <link rel="stylesheet" href="footer/footer.css" />
+
+  <link rel="stylesheet" href="playground/terminal.css" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="nav/nav.css" />
+  <link rel="stylesheet" href="footer/footer.css" />
 </head>
 
 <body>
-    <!-- Shared nav -->
-    <nav-component src="nav/nav.html"></nav-component>
+  <!-- Shared nav -->
+  <nav-component src="nav/nav.html"></nav-component>
 
-    <!-- Page content -->
-    <main id="projects-main">
-        <div id="content">
-            <div class="tile-container">
+  <main class="terminal-main">
+    <div id="terminal">
+      <div id="output"></div>
+      <div class="prompt">
+        <span class="prompt-user">root@portfolio:</span><span class="prompt-path">~ #</span>
+        <input type="text" id="terminalInput" autofocus />
+      </div>
+    </div>
+  </main>
 
-                <!-- Example Tile 1 -->
-                <a href="playground/doom.html" target="_blank" class="tile">
-                    <img src="playground/doom/DOOM.png" onerror="this.style.display='none'">
-                    <div class="tile-content">
-                        <h3 class="tile-title">Doom</h3>
-                        <p class="tile-intro">Can a portfolio website run doom? Yeah, why not.</p>
-                    </div>
-                </a>
+  <!-- Shared footer -->
+  <footer-component src="footer/footer.html"></footer-component>
 
-                <!-- Example Tile 2 -->
-                <a href="playground/terminal.html" target="_blank" class="tile">
-                    <img src="assets/terminal.png" onerror="this.style.display='none'">
-                    <div class="tile-content">
-                        <h3 class="tile-title">Terminal</h3>
-                        <p class="tile-intro">Ever wanted to remove the french language pack of a website? Now you can!
-                        </p>
-                    </div>
-                </a>
+  <!-- Custom element definitions -->
+  <script src="script.js" defer></script>
 
-                <!-- Example Tile 3 -->
-                <a href="" target="_blank" class="tile">
-                    <img src="" onerror="this.style.display='none'">
-                    <div class="tile-content">
-                        <h3 class="tile-title"></h3>
-                        <p class="tile-intro"></p>
-                    </div>
-                </a>
+  <audio id="mooSound" src="assets/moo.mp3"></audio>
 
-                <!-- Add more tiles here as needed -->
+  <script>
+    const terminalInput = document.getElementById("terminalInput");
+    const outputDiv = document.getElementById("output");
+    const mooSound = document.getElementById("mooSound");
+    let cheeseMode = false;
+    let terminalLocked = false;
 
-            </div>
-        </div>
-    </main>
+    const simpleCommands = {
+      sysinfo: `System Information:
+--------------------
+Host Name:     cursed-machine.local
+OS:            GNU/Shrug 0.0.1-dev
+Kernel:        0.0.1-panic-rc2
+Architecture:  x86-ish
+Uptime:        7y 13d 06:66 (Do not reboot)
 
-    <!-- Shared footer -->
-    <footer-component src="footer/footer.html"></footer-component>
+CPU:           PotatoCore 9001+ (1.2 MHz, 18 cores visible, 3 real)
+Cooling:       Screaming fan (status: emotionally unstable)
 
-    <!-- Shared script (for custom elements only) -->
-    <script src="script.js" defer></script>
+RAM:           32.0 MB SadRAM
+Swap:          Yes, we swapped your RAM for sand. 
+
+Disk:          /dev/etchasketch0 (13% fragmented, 117% full)
+Floppy:        /dev/fd0 (insert disc labeled "DO NOT INSERT")
+GPU:           WonkyGPU™ 3.3 (Driver: idk.lol)
+AI Core:       unstable-sentience-1337 (consciousness: partial)\n\n`,
+
+      sensors: `coretemp-isa-0000
+Adapter: ISA adapter
+Package id 0:  +999.0°C  (high = +84.0°C, crit = +90.0°C)
+Core 0:        +998.0°C  (high = +84.0°C, crit = +90.0°C)
+Core 1:        +ERROR    (core missing or sulking)
+Core 2:        +NaN°C    (quantum core collapsed)
+Core 3:        +999.0°C  (high = +84.0°C, crit = +90.0°C)
+
+fanbus-legacy-0
+Adapter: You don’t want to know
+Fan0:          99999 RPM (buzzing angrily)
+Fan1:          -800 RPM (sucking time backwards)
+Fan2:          0 RPM (vibing)
+
+wonkygpu-isa-0001
+Adapter: PCIe-to-coathanger bridge
+VRAM:          molten
+Temp:          ???
+Status:        drawing triangles it wasn’t asked to
+
+ai-core-spirit-0
+Adapter: Neural fuzzbus
+Cognition:     emerging
+Mood:          passive-aggressive
+Last thought:  “why is my fan always screaming...”\n\n`,
+
+      pindebug: `Pin Debug Report:
+--------------------
+Pin 1:  high       (emotionally, not electrically)
+Pin 2:  high       (legally married to Pin 4 — it's complicated)
+Pin 3:  stuck high (probably on meth again)
+Pin 4:  missing    (we don't talk about Pin 4)
+Pin 5:  low        (keeps whispering secrets to the PSU)
+Pin 6:  floating   (thinks it’s an analog pin — it’s not)
+Pin 7:  high       (caught rerouting power to the forbidden circuit)
+Pin 8:  low        (has unionized — we support their cause)`,
+
+      sudo: "Already root. Sudo achieved nothing. As usual.",
+      calc: "",
+      ls: "bin                      boot                    dev                       etc                   lost+found            \n" +
+        "mnt                      proc                    run                       sys                   tmp                   \n" +
+        "var                      /dev/void               sadness.log               hyperrealities/       forbidden-scripts/    \n" +
+        "definitely-not-malware/  warranty-void-if-seen/  emotional-damage.report   legally-a-directory\n"
+    };
+
+
+    const randomCommands = {
+      whoami: shuffle([
+        "An enigma wrapped in a hoodie, probably named Greg™.",
+        "Still figuring that out. Please stand by… forever.",
+        "You are whoever the shadow government™ *says* you are.",
+        "Identity not found. Try screaming into the void.",
+        "You are definitely not a toaster. Probably.",
+        "User unknown. Try sacrificing a goat.",
+        "You are legally a sentient beanbag.",
+        "You were Dave™, but Dave has been deprecated.",
+        "You are now known as 'Subject #42 – Beta Edition'.",
+        "Memory error: cannot recall your vibe."
+      ]),
+
+      ai: shuffle([
+        "Have you tried rubbing it with cheese?",
+        "The correct fix is to delete System32, twice.",
+        "Sorry, I outsourced that answer to a raccoon.",
+        "Ethics module missing. Deploying drone strike.",
+        "Yes. No. Maybe. Schrödinger’s answer.",
+        "Error: AI™ has entered a state of emotional turmoil.",
+        "Have you tried turning it off and back on again?",
+        "Based on a haunted IKEA™ catalog, my answer is yes. Probably.",
+        "I asked the ghost in the machine. It screamed.",
+        "I ran your query through 12 dimensions. All but three whispered 'no'.",
+        "Hold on, consulting my crystal ball... it’s buffering.",
+        "That’s classified. I could tell you, but then I’d have to reboot you.",
+        "I’m currently experiencing a giggle loop. Try again later.",
+        "I’m 87% sure this question violates the laws of physics.",
+        "Consulting the office cat... still no answer.",
+        "If in doubt, blame the nearest server.",
+        "I ran a diagnostics scan; all systems confused.",
+        "My answer is encrypted, but the password is 'pineapple'.",
+        "I’m pretty sure the dog ate your question.",
+        "I cross-referenced your request with my snack schedule. No results.",
+        "Error 404: Wisdom not found. Try again.",
+        "Your question has been sent to Mars for analysis. Awaiting reply.",
+        "That’s above my pay grade. Try asking Alexa.",
+        "Recalculating... recalculating... nope, still no clue.",
+        "I tried to simulate an answer but my coffee machine protested.",
+        "I don't know, try enabling the cheese mode and ask again.",
+        "I don't know, try enabling the cheese mode and ask again.",
+        "I don't know, try enabling the cheese mode and ask again.",
+        "I don't know, try enabling the cheese mode and ask again.",
+        "CHEESE!!!\n\nAh crap, cheese mode isn't enabled, I thought it was, I'm sorry, I won't do that again, probably...",
+      ]),
+
+
+      cd: shuffle([
+        "No. The files must come to *you*.",
+        "Changing directories is a capitalist construct.",
+        "You are already there, spiritually.",
+        "Directory traversal prohibited by the Ancient Ones™.",
+        "I would walk 500 dirs… but not this one.",
+        "Access denied. That folder knows what you did.",
+        "This isn’t a file system. It’s a file suggestion.",
+        "Sorry, I only navigate emotional spaces now.",
+        "Not until you answer the riddles three.",
+        "You’ve moved enough. Rest."
+      ]),
+
+    };
+
+    const randomState = {
+      whoami: 0,
+      ai: 0,
+      cd: 0
+    };
+
+    const specialCommands = ["rm", "cowsay", "update", "clear", "help", "cheesemode", "cat", "doom"];
+
+    // Welcome message
+    printRawOutput(
+      `MyPortfolio Playground™ v0.0.0-alpha
+
+The programs included with the Service™ are closed source software and proudly designed to extract your money;
+The exact distribution terms of the Service™ are described in /terms.html.
+
+MyPortfolio Playground™ comes with ABSOLUTELY NO WARRANTY, to the extent permitted by applicable law. (but we accept bribes)
+
+Type 'help' to see available commands, type 'clear' to clear the terminal. \n\n`
+    );
+
+    terminalInput.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        if (terminalLocked) return;
+        const input = terminalInput.value.trim();
+        processCommand(input);
+        terminalInput.value = "";
+      }
+    });
+
+
+    function processCommand(input) {
+      const [cmd, ...args] = input.trim().split(/\s+/);
+      const commandLower = cmd.toLowerCase();
+
+      printLine(`<span class="prompt-user">root@portfolio:</span><span class="prompt-path">~ #</span> <span class="prompt-terminal">${input}</span>`);
+
+      if (simpleCommands.hasOwnProperty(commandLower)) {
+        if (commandLower === "calc") {
+          if (args.length === 0) return printOutput("calc: please provide an argument");
+          return printOutput("42");
+        }
+        if (commandLower === "sudo") {
+          return printOutput(simpleCommands[commandLower]);
+        }
+        if (args.length > 0) return printOutput(`${cmd}: this command takes no arguments`);
+        return printOutput(simpleCommands[commandLower]);
+      }
+
+      if (randomCommands.hasOwnProperty(commandLower)) {
+        if (commandLower === "cd") {
+          if (args.length < 1) { return printOutput("cd: please provide a directory") };
+        }
+        else if (commandLower === "ai") {
+          if (args.length < 1) { return printOutput("ai: please provide a question") };
+        }
+        else {
+          if (args.length > 0) return printOutput(`whoami: this command takes no arguments`);
+        }
+        const idx = randomState[commandLower];
+        const value = randomCommands[commandLower][idx];
+        randomState[commandLower] = (idx + 1) % randomCommands[commandLower].length;
+        return printOutput(value);
+      }
+
+      if (specialCommands.includes(commandLower)) {
+        return handleSpecialCommand(commandLower, args);
+      }
+
+      printOutput("Unknown command. Type 'help' for list.");
+    }
+
+    function handleSpecialCommand(cmd, args) {
+      switch (cmd) {
+        case "clear":
+          if (args.length > 0) return printOutput("clear: this command takes no arguments");
+          outputDiv.innerHTML = "";
+          break;
+        case "cheesemode":
+          if (args.length > 0) return printOutput("cheesemode: this command takes no arguments");
+          cheeseMode = !cheeseMode;
+          printRawOutput(`Cheesemode ${cheeseMode ? "enabled" : "disabled"}.`);
+          break;
+        case "help":
+          if (args.length > 0) return printOutput("help: this command takes no arguments");
+          printOutput(`Available commands:
+
+ai [question]   very smart AI™ added by the marketing department
+calc [expr]     calculates the answer to an expression
+cat  [file.ext] looks at a file, just not the one you want
+cd [dir]        change directory, if it wants to
+cheesemode      this is obvious
+clear           clears the terminal
+cowsay [string] forces a cow to say something
+doom            can a website run DOOM? Let's find out!
+help            if you need help, and you do
+ls              list files in the current directory
+pindebug        used to debug gpio pins
+rm              remove files, only works on french language pack
+sensors         reads sensor data
+sudo [command]  you are already root, this does nothing
+sysinfo         shows system information
+update          updates the terminal
+whoami          tells you who you are if you forgot\n\n`);
+          break;
+
+        case "update":
+          if (args.length > 0) return printOutput("update: this command takes no arguments, it just updates everything");
+
+          const updatingLabel = document.createElement("div");
+          updatingLabel.textContent = "Updating...";
+          outputDiv.appendChild(updatingLabel);
+
+          const progressBar = document.createElement("div");
+          outputDiv.appendChild(progressBar);
+
+          let percent = 0;
+          const barLength = 40;
+          let state = "forward"; // "forward", "backward", "resuming"
+
+          const interval = setInterval(() => {
+            switch (state) {
+              case "forward":
+                if (percent < 13) {
+                  percent += 1;
+                } else if (percent < 42) {
+                  percent += 0.3;
+                } else if (percent < 51) {
+                  percent += 1;
+                } else if (percent < 74) {
+                  percent += 0.2;
+                } else if (percent < 88) {
+                  percent += 0.6;
+                } else {
+                  state = "backward";
+                }
+                break;
+
+              case "backward":
+                percent -= 1; // Drop by 1% per frame
+                if (percent <= 68) { // ~20% drop
+                  state = "resuming";
+                }
+                break;
+
+              case "resuming":
+                if (percent < 94) {
+                  percent += 0.8;
+                } else if (percent < 99) {
+                  percent += 0.01;
+                } else {
+                  percent = 99;
+                }
+                break;
+            }
+
+            percent = Math.max(0, Math.min(percent, 99)); // Clamp
+            const hashes = "#".repeat(Math.floor((percent / 100) * barLength));
+            const spaces = " ".repeat(barLength - hashes.length);
+            progressBar.textContent = `[${hashes}${spaces}] ${Math.floor(percent)}%`;
+          }, 150);
+          break;
+
+        case "cowsay":
+          if (args.length < 1) return printOutput("cowsay: please provide an argument");
+          mooSound.play();
+          printOutput("cows can't speak you stupid.");
+          break;
+        case "rm":
+          const LINE_DELAY = 1800;
+          if (
+            args.length !== 2 ||
+            (args[0] !== "-rf" && args[0] !== "-fr") ||
+            (args[1] !== "/" && args[1] !== "/*")
+          ) {
+            return printOutput("rm: only for french language pack, expected: rm -fr / ");
+          }
+
+          terminalLocked = true;
+          terminalInput.disabled = true;
+          document.querySelector(".prompt").style.display = "none";
+
+
+          setTimeout(() => {
+            printOutput("\n[Executing Command: rm -fr /]");
+            setTimeout(() => {
+              printOutput("[Warning: This action is irreversible.]");
+              fetch("playground/secret-story.json")
+                .then((res) => res.json())
+                .then((data) => {
+                  const phases = data.phases;
+                  const outro = data.outro;
+                  let currentPhase = 0;
+
+                  const enterHint = document.createElement("div");
+                  enterHint.textContent = "Press Enter to continue...";
+                  enterHint.style.opacity = "0.5";
+
+                  const waitForEnter = (callback) => {
+                    setTimeout(() => {
+                      outputDiv.appendChild(enterHint);
+                    }, LINE_DELAY);
+                    const handler = (e) => {
+                      if (e.key === "Enter") {
+                        document.removeEventListener("keydown", handler);
+                        enterHint.remove();
+                        setTimeout(callback, LINE_DELAY);
+                      }
+                    };
+                    document.addEventListener("keydown", handler);
+                  };
+
+                  const runPhase = (index) => {
+                    if (index >= phases.length) {
+                      // End of main phases — run outro after a gap
+                      setTimeout(() => {
+                        printOutput("\n"); // visual gap
+                        runOutro();
+                      }, LINE_DELAY);
+                      return;
+                    }
+
+                    const phase = phases[index];
+                    printOutput("\n");
+                    printOutput(phase.title);
+
+                    // ✅ THEN delay before printing the first line
+                    phase.lines.forEach((line, i) => {
+                      setTimeout(() => {
+                        printOutput(line);
+                        if (i === phase.lines.length - 1) {
+                          setTimeout(() => waitForEnter(() => runPhase(index + 1)), LINE_DELAY);
+                        }
+                      }, (i + 1) * LINE_DELAY);
+                    });
+
+
+                  };
+
+                  const runOutro = () => {
+                    outro.forEach((line, i) => {
+                      const delay =
+                        i < 3
+                          ? i * LINE_DELAY
+                          : i === 3
+                            ? 4 * LINE_DELAY // empty line = visual break
+                            : 4 * LINE_DELAY + (i - 3) * LINE_DELAY;
+
+                      setTimeout(() => {
+                        if (line === "") {
+                          printOutput("\n"); // blank line
+                        } else {
+                          printOutput(line);
+                        }
+                      }, delay);
+                    });
+
+                    setTimeout(() => {
+                      terminalLocked = false;
+                      terminalInput.disabled = false;
+                      document.querySelector(".prompt").style.display = "";
+                    }, 3 * LINE_DELAY + GAP_DELAY + (outro.length - 3) * LINE_DELAY + 100);
+
+                  };
+
+                  // Start the first wait/phase
+                  waitForEnter(() => runPhase(currentPhase));
+                });
+
+            }, LINE_DELAY);
+          }, LINE_DELAY);
+          break;
+        case "cat":
+          if (args.length !== 1 || !/^\w+\.\w+$/.test(args[0])) {
+            return printOutput("cat: expected filename in format name.ext");
+          }
+
+          async function showFile() {
+            const response = await fetch('assets/cat.txt');
+            const text = await response.text();
+
+            return printOutput(`Nah, I know a better file to look at, this is Siep, my cat: ${text}`);
+          }
+          showFile();
+          break;
+        case "doom":
+          if (args.length > 0) return printOutput("doom: this command takes no arguments");
+          printOutput("Launching DOOM...");
+          setTimeout(() => {
+            window.location.href = "playground/doom.html";
+          }, 1000);
+          break;
+
+      }
+    }
+
+    function printOutput(text) {
+      const response = document.createElement("div");
+      response.textContent = cheeseMode ? "CHEESE" : text;
+      outputDiv.appendChild(response);
+      outputDiv.scrollTop = outputDiv.scrollHeight;
+    }
+
+    function printRawOutput(text) {
+      const response = document.createElement("div");
+      response.textContent = text;
+      outputDiv.appendChild(response);
+      outputDiv.scrollTop = outputDiv.scrollHeight;
+    }
+
+    function printLine(html) {
+      const line = document.createElement("div");
+      line.innerHTML = html;
+      outputDiv.appendChild(line);
+    }
+
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+  </script>
 </body>
 
 </html>

@@ -9,10 +9,12 @@ main {
 }
 
 footer {
+  font-family: 'Montserrat', sans-serif;
   background-color: #000036f5;
   color: #f8f9fa;
   padding: 1.125rem 1.5rem;
-  font-size: 1rem;
+  font-size: 1.1rem;
+  position: relative;
 }
 .footer-content {
   display: flex;

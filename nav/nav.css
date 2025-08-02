@@ -20,7 +20,7 @@ nav {
   box-shadow: 0 0.188rem 0.25rem #00000036; /* 3px 4px */
   text-align: center;
   overflow: hidden;
-  font-size: 1.25rem;
+  font-size: 1.5rem !important;
 
   display: flex;
   align-items: center;
@@ -94,18 +94,18 @@ nav ul li:hover {
 
 .line {
   background-color: #d8d5db;
-  height: 0.188rem; /* 3px */
+  height: 0.188rem; 
   width: 100%;
   transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
 /* Transform lines into an "X" when menu is open */
 .menu-icon.open .line1 {
-  transform: translateY(0.063rem) rotate(45deg); /* 1px */
+  transform: translateY(0.063rem) rotate(45deg); 
 }
 
 .menu-icon.open .line2 {
-  transform: translateY(-0.563rem) rotate(-45deg); /* -9px */
+  transform: translateY(-0.563rem) rotate(-45deg); 
 }
 
 .mobile-menu {
@@ -113,13 +113,13 @@ nav ul li:hover {
   top: 0;
   right: -100%;
   height: 100vh;
-  width: 15.625rem; /* 250px */
+  width: 15.625rem;
   background-color: #1a1a1a;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
-  padding-top: 2.813rem; /* 45px */
+  padding-top: 2.813rem;
   transition: right 0.3s ease-out;
   z-index: 19;
 }
