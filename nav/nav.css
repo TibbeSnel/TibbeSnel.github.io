@@ -27,6 +27,15 @@ nav {
   justify-content: center;
 }
 
+@media (min-width: 2240px) {
+  nav {
+    height: 6rem;
+    font-size: 2.2rem !important;
+  }
+  .nav-logo {
+    width: 4rem !important; /* 70px */
+  }
+}
 
 nav ul {
   list-style: none;

@@ -1,6 +1,7 @@
 <!-- projects.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,6 +13,7 @@
   <link rel="stylesheet" href="nav/nav.css" />
   <link rel="stylesheet" href="footer/footer.css" />
 </head>
+
 <body>
   <!-- Shared nav -->
   <nav-component src="nav/nav.html"></nav-component>
@@ -31,47 +33,75 @@
 
   <!-- GitHub Projects with sessionStorage -->
   <script type="module">
-    const contentDiv = document.getElementById('content');
-    const cached = sessionStorage.getItem('githubRepos');
+    window.addEventListener('DOMContentLoaded', () => {
+      const contentDiv = document.getElementById('content');
+      const cacheKey = 'githubRepos';
+      const cacheTimeKey = 'githubReposTime';
+      const cacheDuration = 1000 * 60 * 60; // 1 hour in milliseconds
 
-    if (cached) {
-      try {
-        const repos = JSON.parse(cached);
-        renderProjects(repos);
-      } catch (e) {
-        console.warn('Cached GitHub data is invalid, fetching fresh...');
+      const cachedData = sessionStorage.getItem(cacheKey);
+      const cachedTime = sessionStorage.getItem(cacheTimeKey);
+
+      const isCacheValid = cachedData && cachedTime && (Date.now() - parseInt(cachedTime)) < cacheDuration;
+
+      if (isCacheValid) {
+        try {
+          const repos = JSON.parse(cachedData);
+          renderProjects(repos);
+        } catch (e) {
+          console.warn('Invalid cache. Refetching repos.');
+          fetchRepos();
+        }
+      } else {
         fetchRepos();
       }
-    } else {
-      fetchRepos();
-    }
 
-    function fetchRepos() {
-      fetch('https://api.github.com/users/TibbeSnel/repos')
-        .then(res => res.json())
-        .then(repos => {
-          repos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
-          sessionStorage.setItem('githubRepos', JSON.stringify(repos));
-          renderProjects(repos);
-        })
-        .catch(err => {
-          contentDiv.innerHTML = `<p class="text-red-500">Error loading GitHub projects.</p>`;
-          console.error(err);
-        });
-    }
+      function fetchRepos() {
+        fetch('https://api.github.com/users/TibbeSnel/repos')
+          .then(res => res.json())
+          .then(async repos => {
+            repos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
 
-    function renderProjects(repos) {
-      const container = document.createElement('div');
-      container.className = 'tile-container';
+            const withStatus = await Promise.all(repos.map(async repo => {
+              const readmeUrl = `https://raw.githubusercontent.com/TibbeSnel/${repo.name}/main/docs/README.md`;
 
-      repos.forEach(repo => {
-        const imageUrl = `https://raw.githubusercontent.com/TibbeSnel/${repo.name}/main/docs/thumb.jpg`;
-        const tile = document.createElement('a');
-        tile.href = repo.html_url;
-        tile.target = '_blank';
-        tile.className = 'tile';
+              try {
+                const res = await fetch(readmeUrl);
+                const text = await res.text();
+                const match = text.match(/^#\s*Status:\s*(.+)$/im);
+                if (match) repo.status = match[1].trim();
+              } catch (e) {
+                console.warn(`Failed to fetch README for ${repo.name}`, e);
+              }
 
-        tile.innerHTML = `
+              return repo;
+            }));
+
+            sessionStorage.setItem(cacheKey, JSON.stringify(withStatus));
+            sessionStorage.setItem(cacheTimeKey, Date.now().toString());
+
+            renderProjects(withStatus);
+          })
+          .catch(err => {
+            contentDiv.innerHTML = `<p class="text-red-500">Error loading GitHub projects.</p>`;
+            console.error(err);
+          });
+      }
+
+      function renderProjects(repos) {
+        const container = document.createElement('div');
+        container.className = 'tile-container';
+
+        repos.forEach(repo => {
+          const imageUrl = `https://raw.githubusercontent.com/TibbeSnel/${repo.name}/main/docs/thumb.jpg`;
+
+          const tile = document.createElement('a');
+          tile.href = repo.html_url;
+          tile.target = '_blank';
+          tile.className = 'tile';
+
+          tile.innerHTML = `
+          ${repo.status ? `<div class="projects-ribbon">${repo.status}</div>` : ''}
           <img src="${imageUrl}" alt="${repo.name} thumbnail" onerror="this.style.display='none'">
           <div class="tile-content">
             <p class="tile-date">${new Date(repo.updated_at).toLocaleDateString()}</p>
@@ -80,11 +110,14 @@
           </div>
         `;
 
-        container.appendChild(tile);
-      });
+          container.appendChild(tile);
+        });
 
-      contentDiv.appendChild(container);
-    }
+        contentDiv.appendChild(container);
+      }
+    });
   </script>
+
 </body>
+
 </html>

@@ -5,23 +5,29 @@ html {
   scrollbar-color: #202020 #000;
   font-size: 1rem;
 }
-*, *::before, *::after {
+
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
   color: #f8f9fa;
+
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 /* ── Page Background & Navigation ─────────────────────────── */
 body {
   background: #000;
 }
+
 nav-component {
   display: block;
   height: 4rem;
 }
-
 
 /* ────────────────────────────────────────────────────────────────────────── */
 /* ── Home Page ───────────────────────────────────────────────────────────── */
@@ -43,28 +49,55 @@ nav-component {
   align-items: center;
   justify-items: center;
   width: 90vw;
-  max-width: 100vw;
-  padding: 6rem 2rem;
+  padding: 7rem 2rem;
   gap: 1rem;
   margin: 0 auto;
 }
+
+
+@media (max-width: 1800px) {
+  .hero-text h1 {
+    font-size: 5rem;
+  }
+  .hero-text p {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 1800px) and (max-width: 2239px) {
+  .hero-text h1 {
+    font-size: 6rem;
+  }
+  .hero-text p {
+    font-size: 1.6rem;
+  }
+}
+
+@media (min-width: 2240px) {
+  .hero-text h1 {
+    font-size: 6rem;
+  }
+  .hero-text p {
+    font-size: 1.7rem;
+  }
+}
+
 .hero-text h1 {
-  font-size: clamp(3rem, 6vw, 5rem);
   margin-bottom: 1.5rem;
   line-height: 1.1;
 }
+
 .hero-text p {
-  font-size: 1.2rem;
   line-height: 1.5;
   padding: 0 0.3rem;
 }
+
 .hero-image {
   position: relative;
-  width: 100%;
-  max-width: 43.75rem;
   aspect-ratio: 3 / 2;
   overflow: hidden;
   background: #000;
+  width: 100%;
 }
 
 /* Carousel Slides */
@@ -75,6 +108,7 @@ nav-component {
   overflow: hidden;
   border-radius: 0.75rem;
 }
+
 .carousel-slide img {
   width: 100%;
   height: 100%;
@@ -99,13 +133,23 @@ nav-component {
   transition: height 0.3s ease;
   border-radius: 0 0 0.75rem 0.75rem;
 }
+
+@media (min-width: 2240px) {
+  .title-bar {
+    height: 5rem;
+    font-size: 2em;
+  }
+}
+
 .title-bar:hover {
   height: auto;
   max-height: 50%;
 }
+
 .title-text {
   font-weight: bold;
 }
+
 .summary {
   font-size: 0.9em;
   margin-top: 0.5em;
@@ -116,6 +160,7 @@ nav-component {
   overflow-wrap: break-word;
   transition: opacity 0.3s ease;
 }
+
 .title-bar:hover .summary {
   opacity: 1;
 }
@@ -131,39 +176,50 @@ nav-component {
   transition: transform 0.3s;
   z-index: 2;
 }
+
 .arrow:hover {
   transform: translateY(-50%) scale(1.2);
 }
+
 .prev {
   left: 0.5em;
 }
+
 .next {
   right: 0.5em;
 }
 
 /* Responsive Adjustments*/
-@media (max-width: 768px), (orientation: portrait) {
+@media (max-width: 768px),
+(orientation: portrait) {
   .hero {
     padding: 3rem 0;
+    width: 90vw;
   }
+
   .hero-text {
     padding-bottom: 2rem;
     text-align: center;
   }
+
   .hero-text h1 {
     text-align: center;
   }
+
   .hero-image {
     max-width: 100%;
   }
+
   .title-bar {
     height: 2.5em;
     font-size: 1em;
     padding: 0.5rem;
   }
+
   .br-mobile {
     display: inline !important;
   }
+
   .indent-desktop {
     display: none !important;
   }
@@ -188,6 +244,28 @@ nav-component {
 
 .about-section-text {
   font-size: 1.2rem;
+}
+
+@media (min-width: 2000px) {
+  .about-text p {
+    font-size:  1.6rem !important;
+  }
+  #about-main h1 {
+    font-size: 5rem;
+  }
+  .about-section-title {
+    font-size: 3rem;
+  }
+  .about-section-text {
+    font-size: 1.4rem;
+  }
+  h3.edu-title {
+    font-size: 1.8rem;
+  }
+  .edu-subtitle
+  .edu-description {
+    font-size: 1.2rem;
+  }
 }
 
 .about-intro {
@@ -318,6 +396,7 @@ h3.edu-title {
   line-height: 1.4;
 }
 
+
 .ribbon {
   position: absolute;
   top: 0;
@@ -332,7 +411,8 @@ h3.edu-title {
 }
 
 
-@media (max-width: 768px), (orientation: portrait) {
+@media (max-width: 768px),
+(orientation: portrait) {
   #about-main {
     margin-top: 6rem;
     padding: 1rem;
@@ -420,7 +500,7 @@ h3.edu-title {
     padding: 0.15em 0.4em;
   }
 
-  .future{
+  .future {
     margin-bottom: 2rem;
   }
 }
@@ -458,10 +538,26 @@ h3.edu-title {
   flex-direction: column;
   width: 100%;
   max-width: 25rem;
+  position: relative;
 }
+
+.projects-ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #f8f9fa;
+  color: #000045;
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 0.15em 0.4em;
+  border-radius: 6px;
+  z-index: 1;
+}
+
 .tile:hover {
   transform: translateY(-0.25rem);
 }
+
 /* Image ratio wrapper */
 .tile-image-container {
   width: 100%;
@@ -499,7 +595,8 @@ h3.edu-title {
   text-overflow: ellipsis;
 }
 
-@media (max-width: 768px), (orientation: portrait) {
+@media (max-width: 768px),
+(orientation: portrait) {
   .tile-container {
     grid-template-columns: 1fr;
     padding: 1rem;
@@ -509,4 +606,3 @@ h3.edu-title {
     max-width: 100%;
   }
 }
-

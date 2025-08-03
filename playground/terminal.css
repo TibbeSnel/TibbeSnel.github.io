@@ -20,6 +20,15 @@ body {
   font-family: Consolas, monospace;
   color: #00ff00;
 }
+@media (min-width: 2240px) {
+  .terminal-main,
+  .terminal-main * {
+    font-size: 1.4rem;
+  }
+  .terminal-main {
+    padding-top: 10rem !important;
+  }
+}
 .terminal-main {
   padding-top: 6rem;
   display: flex;

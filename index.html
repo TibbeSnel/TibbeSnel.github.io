@@ -1,6 +1,7 @@
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,8 +14,10 @@
   <link rel="stylesheet" href="footer/footer.css" />
 
   <!-- font -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
 </head>
+
 <body>
   <!-- Shared nav -->
   <nav-component src="nav/nav.html"></nav-component>
@@ -24,7 +27,8 @@
     <section class="hero">
       <div class="hero-text">
         <h1>Hi! I'm Tibbe, welcome to <br> my portfolio</h1>
-        <p>This is my portfolio, where I showcase my projects and<br> what I’ve been working on. I'm always curious, learning, <br>and building something new.</p>
+        <p>This is my portfolio, where I showcase my projects and<br> what I’ve been working on. I'm always curious,
+          learning, <br>and building something new.</p>
       </div>
       <div class="hero-image carousel">
         <!-- Carousel slides will be injected here -->
@@ -42,14 +46,21 @@
 
   <!-- GitHub Carousel with sessionStorage -->
   <script type="module">
+    console.log(window.innerWidth + " x " + window.innerHeight)
     document.addEventListener('DOMContentLoaded', () => {
       const carouselEl = document.querySelector('.hero-image.carousel');
       let slideIndex = 0;
       let projects = [];
 
-      const cached = sessionStorage.getItem('githubRepos');
+      const cacheKey = 'githubRepos';
+      const cacheTimeKey = 'githubReposTime';
+      const cacheDuration = 1000 * 60 * 60; // 1 hour
 
-      if (cached) {
+      const cached = sessionStorage.getItem(cacheKey);
+      const cachedTime = sessionStorage.getItem(cacheTimeKey);
+      const isCacheValid = cached && cachedTime && (Date.now() - parseInt(cachedTime)) < cacheDuration;
+
+      if (isCacheValid) {
         try {
           projects = JSON.parse(cached);
           renderSlides();
@@ -68,7 +79,10 @@
           .then(repos => {
             repos.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
             projects = repos.slice(0, 5);
-            sessionStorage.setItem('githubRepos', JSON.stringify(projects));
+
+            sessionStorage.setItem(cacheKey, JSON.stringify(projects));
+            sessionStorage.setItem(cacheTimeKey, Date.now().toString());
+
             renderSlides();
             showSlide(slideIndex);
           })
@@ -86,15 +100,15 @@
           const slide = document.createElement('div');
           slide.className = 'carousel-slide';
           slide.innerHTML = `
-            <a href="projects.html">
-              <img src="https://raw.githubusercontent.com/TibbeSnel/${repo.name}/main/docs/thumb.jpg?random=${i + 1}" 
-                   alt="${repo.name} thumbnail" 
-                   onerror="this.style.display='none'">
-            </a>
-            <div class="title-bar">
-              <div class="title-text">${repo.name}</div>
-              <div class="summary">${repo.description || 'No description available.'}</div>
-            </div>`;
+          <a href="projects.html">
+            <img src="https://raw.githubusercontent.com/TibbeSnel/${repo.name}/main/docs/thumb.jpg?random=${i + 1}" 
+                 alt="${repo.name} thumbnail" 
+                 onerror="this.style.display='none'">
+          </a>
+          <div class="title-bar">
+            <div class="title-text">${repo.name}</div>
+            <div class="summary">${repo.description || 'No description available.'}</div>
+          </div>`;
           carouselEl.insertBefore(slide, document.getElementById('prevBtn'));
         });
       }
@@ -117,5 +131,7 @@
       });
     });
   </script>
+
 </body>
+
 </html>
