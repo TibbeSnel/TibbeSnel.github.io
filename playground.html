@@ -38,6 +38,13 @@
   <audio id="mooSound" src="assets/moo.mp3"></audio>
 
   <script>
+    const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  if (isMobile) {
+    alert("Unfortunately, the terminal is not optimized for mobile devices. Please use a desktop browser for it to work properly.s");
+  }
+
+
     const terminalInput = document.getElementById("terminalInput");
     const outputDiv = document.getElementById("output");
     const mooSound = document.getElementById("mooSound");

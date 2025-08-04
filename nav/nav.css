@@ -29,7 +29,7 @@ nav {
 
 @media (min-width: 2240px) {
   nav {
-    height: 6rem;
+    height: 8rem;
     font-size: 2.2rem !important;
   }
   .nav-logo {
