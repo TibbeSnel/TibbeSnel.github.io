@@ -1,7 +1,7 @@
 # Portfolio Site
 #### Welcome to my first project README, this is the place where from now on, I will post an overview of what I made, why I made it, and how I made it.
 
-#### Now for this project, the portfolio site. It began when I wanted to record my projects in some way—mostly for myself, so I could look back at the weird stuff I built. But I also wanted to share my projects, so I decided to build a site. I looked for inspiration (thank you Karam Haddad), and started working. For this project I used a lot of AI (thanks ChatGPT), I am just not good enough at web disign to do it all on my own (And to be honest, I prefer to spend my time on learning other things ;-) That said, you still learn a lot by debugging, and prompting is also a great skill to have!
+#### Now for this project, the portfolio site. It began when I wanted to record my projects in some way—mostly for myself, so I could look back at the weird stuff I built. But I also wanted to share my projects, so I decided to build a site. I looked for inspiration (thank you [Karam Haddad](karamhaddad.com), and started working. For this project I used a lot of AI (thanks ChatGPT), I am just not good enough at web disign to do it all on my own (And to be honest, I prefer to spend my time on learning other things ;-) That said, you still learn a lot by debugging, and prompting is also a great skill to have!
 
 
 
