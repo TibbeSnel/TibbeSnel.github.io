@@ -185,8 +185,7 @@ nav-component {
 }
 
 /* Responsive Adjustments*/
-@media (max-width: 768px), (orientation: portrait),
-(orientation: portrait) {
+@media (max-width: 768px), (orientation: portrait) {
   .hero {
     padding: 2rem 0;
     width: 90vw;
@@ -201,7 +200,12 @@ nav-component {
 
   .hero-text h1 {
     text-align: center;
-    font-size: 3.5rem;
+    font-size: 3.4rem;
+  }
+
+  .hero-text p {
+    max-width: 100%;
+    font-size: 1.1rem;
   }
 
   .hero-image {
@@ -220,6 +224,15 @@ nav-component {
 
   .indent-desktop {
     display: none !important;
+  }
+}
+
+@media (max-width: 400px){
+  .hero-text h1 {
+    font-size: 2.5rem;
+  }
+  .hero-text p {
+    font-size: 1rem;
   }
 }
 
@@ -409,8 +422,7 @@ h3.edu-title {
 }
 
 
-@media (max-width: 768px), (orientation: portrait),
-(orientation: portrait) {
+@media (max-width: 768px), (orientation: portrait) {
   #about-main {
     margin-top: 6rem;
     padding: 1rem;
@@ -593,8 +605,7 @@ h3.edu-title {
   text-overflow: ellipsis;
 }
 
-@media (max-width: 768px), (orientation: portrait),
-(orientation: portrait) {
+@media (max-width: 768px), (orientation: portrait) {
   .tile-container {
     grid-template-columns: 1fr;
     padding: 1rem;
